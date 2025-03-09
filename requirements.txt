@@ -1,0 +1,16 @@
+langchain_core
+langchain_community
+langchain_openai
+streamlit
+python-dotenv
+pandas
+notebook
+numpy
+python-box
+pyYAML
+tqdm
+ensure
+types-PyYAML
+scipy
+
+-e .
