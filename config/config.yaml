@@ -1,0 +1,7 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  github_url: "https://api.github.com/user/repos?per_page=100"
+  save_dir: artifacts/data_ingestion
+  
