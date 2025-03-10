@@ -13,7 +13,7 @@ class DataTransformationTrainingPipeline:
         config = ConfigurationManager()
         data_transformation_config = config.get_data_transformation_config()
         data_transformation = DataTransformation(config=data_transformation_config)
-        data_transformation.get_pdf_from_text()
+        data_transformation.get_pdf_from_data()
 
 
 if __name__ == '__main__':
