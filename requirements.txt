@@ -12,5 +12,9 @@ tqdm
 ensure
 types-PyYAML
 scipy
+reportlab
+PyPDF2
+markdown2
+html2text  
 
 -e .

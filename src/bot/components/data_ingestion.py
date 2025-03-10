@@ -1,6 +1,8 @@
 import os
 import base64
 import requests
+import markdown2
+import html2text
 from bot import logger
 from dotenv import load_dotenv
 load_dotenv()
@@ -15,7 +17,7 @@ class DataIngestion:
         headers = {"Authorization": f"token {os.getenv("TOKEN")}"}
         repos = requests.get(url, headers=headers).json()
         save_dir = self.config.save_dir
-        with open(os.path.join(save_dir,'repo.txt'),'w',encoding="utf-8") as f:
+        with open(os.path.join(save_dir,'repo.txt'),'w',encoding='utf-8') as f:
             logger.info(f"Starting writing data from git hub repos")
             for repo in repos:
                 OWNER = repo['owner']['login']
@@ -27,7 +29,9 @@ class DataIngestion:
                 readme_content = "No Readme FIle"
                 if response.status_code == 200:
                     data = response.json()
-                    readme_content = base64.b64decode(data["content"]).decode()
+                    readme_content = base64.b64decode(data["content"]).decode("utf-8")
+                    readme_content =  markdown2.markdown(readme_content, extras=["strip"])
+                    readme_content = html2text.html2text(readme_content)
                 
                 f.write(str(repo["name"]) + " -> " + str(repo["html_url"] +"\n"))
                 f.write("Description \n")
