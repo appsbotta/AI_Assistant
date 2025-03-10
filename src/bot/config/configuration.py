@@ -2,6 +2,7 @@ from bot.constants import *
 from bot.utils.common import read_yaml,create_directories
 from bot.entity.config_entity import (
     DataIngestionConfig,
+    DataTrasformationConfig
 )
 
 class ConfigurationManager:
@@ -27,3 +28,16 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    
+    def get_data_transformation_config(self)->DataTrasformationConfig:
+        config = self.config.data_transformation
+
+        create_directories([config.root_dir])
+
+        data_trasformation_config = DataTrasformationConfig(
+            root_dir=config.root_dir,
+            file_dir=config.file_dir,
+            save_dir=config.save_dir,
+        )
+
+        return data_trasformation_config
