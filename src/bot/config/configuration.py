@@ -7,8 +7,8 @@ from bot.entity.config_entity import (
 class ConfigurationManager:
     def __init__(
             self,
-            config_path = Path(CONFIG_PATH),
-            params_path = Path(PARAMS_PATH)
+            config_path = CONFIG_PATH,
+            params_path = PARAMS_PATH
         ):
         self.config = read_yaml(config_path)
         self.param = read_yaml(params_path)
