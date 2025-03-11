@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LangChain Flask App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        textarea { width: 100%; }
+        .response { background: #f0f0f0; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Enter Your Prompt</h1>
+    <form method="post">
+        <textarea name="prompt" rows="5" placeholder="Type your question here..."></textarea><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    {% if answer %}
+        <h2>Answer:</h2>
+        <div class="response">{{ answer|safe }}</div>
+    {% endif %}
+</body>
+</html>

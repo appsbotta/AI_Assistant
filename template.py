@@ -26,7 +26,7 @@ list_of_files = [
     "requirements.txt",
     "setup.py",
     "research/trails.ipynb",
-    "template/index.html",
+    "templates/index.html",
     "main.py",
     "app.py"
 ]
