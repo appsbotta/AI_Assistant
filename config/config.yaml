@@ -3,6 +3,8 @@ artifacts_root: artifacts
 data_ingestion:
   root_dir: artifacts/data_ingestion
   github_url: "https://api.github.com/user/repos?per_page=100"
+  linkedin_url: https://github.com/appsbotta/DataSets/raw/refs/heads/main/linkedinData.zip
+  local_data_file: artifacts/data_ingestion/data.zip
   save_dir: artifacts/data_ingestion
   
 data_transformation:

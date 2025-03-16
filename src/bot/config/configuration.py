@@ -24,6 +24,8 @@ class ConfigurationManager:
         data_ingestion_config = DataIngestionConfig(
             root_dir=config.root_dir,
             github_url=config.github_url,
+            linkedin_url=config.linkedin_url,
+            local_data_file=config.local_data_file,
             save_dir=config.save_dir
         )
 

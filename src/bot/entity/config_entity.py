@@ -5,6 +5,8 @@ from pathlib import Path
 class DataIngestionConfig:
     root_dir: Path
     github_url: str
+    linkedin_url: str
+    local_data_file: Path
     save_dir: Path
 
 @dataclass(frozen=True)
