@@ -23,5 +23,6 @@ streamlit
 pypdf
 flask
 uvicorn
+urllib
 
 -e .

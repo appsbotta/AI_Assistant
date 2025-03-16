@@ -10,6 +10,9 @@ import html2text
 import base64
 from pathlib import Path
 from bot.entity.config_entity import DataTrasformationConfig
+import shutil
+from dotenv import load_dotenv
+load_dotenv()
 
 class DataTransformation:
     def __init__(self,config:DataTrasformationConfig):
@@ -17,13 +20,19 @@ class DataTransformation:
 
     def get_data(self):
         file_dir = self.config.file_dir
+        for file_name in os.listdir(file_dir):
+            if file_name.lower().endswith(".pdf"):  # Check if file is a PDF
+                source_path = os.path.join(file_dir, file_name)
+                destination_path = os.path.join(self.config.save_dir, file_name)
+                shutil.copy2(source_path, destination_path)
+    
         with open(os.path.join(file_dir,'data.json'),'r',encoding='utf-8') as f:
             data = json.load(f)
         return data
     
     def get_lang(self,repo_name):
         url = f'https://api.github.com/repos/appsbotta/{repo_name}/languages'
-        headers = {"Authorization": f"token {os.getenv("TOKEN")}"}
+        headers = {"Authorization": f"token {os.getenv('TOKEN')}"}
         lang = requests.get(url,headers=headers).json()
         top_three_keys = sorted(lang, key=lang.get, reverse=True)[:3]
         # logger.info(f"Got top 3 languages used in {repo_name}")
@@ -44,7 +53,7 @@ class DataTransformation:
     def get_readme(self,OWNER,REPO):
         # logger.info(f"requeting readme file for the repo {REPO} ")
         readme = f"https://api.github.com/repos/{OWNER}/{REPO}/readme"
-        headers = {"Authorization": f"token {os.getenv("TOKEN")}"}
+        headers = {"Authorization": f"token {os.getenv('TOKEN')}"}
         response = requests.get(readme,headers=headers)
         readme_content = "No Readme FIle"
         if response.status_code == 200:
