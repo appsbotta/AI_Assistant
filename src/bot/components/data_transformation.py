@@ -95,8 +95,6 @@ class DataTransformation:
 
 
         for i,repo in enumerate(data):
-            print(f"DEBUG: repo type={type(repo)}, value={repo}")
-            repo = json.loads(repo) if isinstance(repo, str) else repo
             text = f"{i+1}. <b>{repo['name']}</b>  --->   {repo['html_url']} \n"
             # text = text + str(i+1) + ". " +  str(repo["name"]) + " -> " + str(repo["html_url"]) +"\n"
             paragraph = Paragraph(text,custom_style)
