@@ -16,7 +16,7 @@ class DataIngestion:
     def get_repos(self):
         logger.info(f"Starting writing data from git hub repos")
         url = self.config.github_url
-        headers = {"Authorization": f"token {os.environ["TOKEN"]}"}
+        headers = {"Authorization": f'token {os.environ["TOKEN"]}'}
         repos = requests.get(url, headers=headers).json()
         save_dir = self.config.save_dir
         with open(os.path.join(save_dir,"data.json"),'w',encoding='utf-8') as f:

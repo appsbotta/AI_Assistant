@@ -12,7 +12,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     answer = None
-    training_pipeline.train()
+    # training_pipeline.train()
     if request.method == "POST":
         prompt = request.form.get("prompt")
         if prompt:
