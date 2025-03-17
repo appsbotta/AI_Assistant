@@ -28,6 +28,7 @@ class DataTransformation:
     
         with open(os.path.join(file_dir,'data.json'),'r',encoding='utf-8') as f:
             data = json.load(f)
+        print(data)
         return data
     
     def get_lang(self,repo_name):
