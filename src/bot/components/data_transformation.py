@@ -13,7 +13,6 @@ from bot.entity.config_entity import DataTrasformationConfig
 import shutil
 from dotenv import load_dotenv
 load_dotenv()
-os.environ["TOKEN"] = os.getenv("TOKEN")
 
 class DataTransformation:
     def __init__(self,config:DataTrasformationConfig):
@@ -33,7 +32,7 @@ class DataTransformation:
     
     def get_lang(self,repo_name):
         url = f'https://api.github.com/repos/appsbotta/{repo_name}/languages'
-        headers = {"Authorization": f'token {os.environ["TOKEN"]}'}
+        headers = {"Authorization": f'token {os.getenv("TOKEN")}'}
         lang = requests.get(url,headers=headers).json()
         top_three_keys = sorted(lang, key=lang.get, reverse=True)[:3]
         # logger.info(f"Got top 3 languages used in {repo_name}")
@@ -54,7 +53,7 @@ class DataTransformation:
     def get_readme(self,OWNER,REPO):
         # logger.info(f"requeting readme file for the repo {REPO} ")
         readme = f"https://api.github.com/repos/{OWNER}/{REPO}/readme"
-        headers = {"Authorization": f'token {os.environ["TOKEN"]}'}
+        headers = {"Authorization": f'token {os.getenv("TOKEN")}'}
         response = requests.get(readme,headers=headers)
         readme_content = "No Readme FIle"
         if response.status_code == 200:

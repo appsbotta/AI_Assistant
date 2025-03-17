@@ -1,10 +1,8 @@
 ---
 title: AI Assistant
-emoji: 📚
-colorFrom: blue
-colorTo: indigo
+emoji: 🔥
+colorFrom: indigo
+colorTo: pink
 sdk: docker
 pinned: false
-license: mit
-short_description: Personal AI Assistant
 ---

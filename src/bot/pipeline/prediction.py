@@ -12,7 +12,6 @@ import os
 import time
 from dotenv import load_dotenv
 load_dotenv()
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 
 class PredictionPipeline:
     def __init__(self):
@@ -26,7 +25,7 @@ class PredictionPipeline:
         final_documents = text_splitter.split_documents(docs)
         vectors = FAISS.from_documents(final_documents, embeddings)
 
-        llm = ChatOpenAI(model='gpt-3.5-turbo')
+        llm = ChatOpenAI(model='gpt-3.5-turbo',api_key=os.getenv("OPENAI_API_KEY"))
 
         prompt = ChatPromptTemplate.from_template(
             """
