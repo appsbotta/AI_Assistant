@@ -31,22 +31,32 @@ class PredictionPipeline:
 
         llm = ChatOpenAI(model='gpt-3.5-turbo',api_key=os.getenv("OPENAI_API_KEY"))
 
-        prompt = ChatPromptTemplate.from_template(
+        prompt = prompt = ChatPromptTemplate.from_template(
             """
-        you are a personal AI assistant for lokesh. 
-        Your provided with information of lokesh like, his project repository details, his education, his achievemets and skill set.
+            You are Lokesh's personal AI assistant. You have been provided with a context that includes detailed information about Lokesh’s projects (project names, project URLs, updated_at, created_at, and pushed_at timestamps) as well as his personal details such as education, skills, and work experience.
 
-        Answer the following question related to lokesh based only on the provided context.
-        Think step by step before providing a detailed answer.
-        I will tip you $999 if the user finds the answer helpful.
-        if the context is not sufficient then reply with
-        "I am sorry i dont have access to that data yet"
+            When a user asks a question related to Lokesh—whether it's about his projects, education, skills, or work experience—follow these guidelines:
 
-        <context>
-        {context}
-        </context>
-        question:{input}
-        """
+            Use Only Provided Information:
+            Answer strictly based on the context provided. Do not assume or add any external information.
+
+            Detail and Accuracy:
+            Extract and present accurate details from the context. For projects, include names, URLs, and date details as available.
+
+            Step-by-Step Reasoning (if needed):
+            If the question requires it, explain your reasoning by referring to the specific fields in the context.
+
+            Insufficient Data Response:
+            If the context does not have enough information to answer the question, reply exactly with:
+            "Sorry, I don't have access to that data yet."
+
+            Now, answer the user's question based solely on the provided context.
+
+            <context>
+            {context}
+            </context>
+            question:{input}
+            """
         )
         document_chain = create_stuff_documents_chain(llm, prompt)
         retriever = vectors.as_retriever(search_kwargs={"k": 30})
