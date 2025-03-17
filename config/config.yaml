@@ -1,13 +1,13 @@
-artifacts_root: artifacts
+artifacts_root: /workspace/artifacts
 
 data_ingestion:
-  root_dir: artifacts/data_ingestion
+  root_dir: /workspace/artifacts/data_ingestion
   github_url: "https://api.github.com/user/repos?per_page=100"
   linkedin_url: https://github.com/appsbotta/DataSets/raw/refs/heads/main/linkedinData.zip
-  local_data_file: artifacts/data_ingestion/data.zip
-  save_dir: artifacts/data_ingestion
+  local_data_file: /workspace/artifacts/data_ingestion/data.zip
+  save_dir: /workspace/artifacts/data_ingestion
   
 data_transformation:
-  root_dir: artifacts/data_transformation
-  file_dir: artifacts/data_ingestion
-  save_dir: artifacts/data_transformation
+  root_dir: /workspace/artifacts/data_transformation
+  file_dir: /workspace/artifacts/data_ingestion
+  save_dir: /workspace/artifacts/data_transformation
