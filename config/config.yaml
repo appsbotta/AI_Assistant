@@ -1,3 +1,4 @@
+#  remove the /tmp/ when running locally
 artifacts_root: /tmp/artifacts
 
 data_ingestion:
@@ -11,3 +12,6 @@ data_transformation:
   root_dir: /tmp/artifacts/data_transformation
   file_dir: /tmp/artifacts/data_ingestion
   save_dir: /tmp/artifacts/data_transformation
+
+prediction:
+  folder_dir: /tmp/artifacts/data_transformation

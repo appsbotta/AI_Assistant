@@ -9,17 +9,21 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 import os
+from bot.constants import CONFIG_PATH
+from bot.utils.common import read_yaml
 import time
 from dotenv import load_dotenv
 load_dotenv()
 
+
+
 class PredictionPipeline:
-    def __init__(self):
-        pass
+    def __init__(self,config_path=CONFIG_PATH):
+        self.config =  read_yaml(config_path)
 
     def chain(self):
         embeddings = OpenAIEmbeddings()
-        loader = PyPDFDirectoryLoader("/tmp/artifacts/data_transformation")
+        loader = PyPDFDirectoryLoader(self.config.prediction.folder_dir)
         docs = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         final_documents = text_splitter.split_documents(docs)
