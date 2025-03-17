@@ -3,8 +3,9 @@ from flask import Flask,render_template,url_for,request,redirect
 from bot.pipeline.prediction import PredictionPipeline
 from bot.pipeline.training import TrainingPipeline
 
-prediction_pipeline = PredictionPipeline()
 training_pipeline = TrainingPipeline()
+training_pipeline.train()
+prediction_pipeline = PredictionPipeline()
 retriever_chain = prediction_pipeline.chain()
 
 app = Flask(__name__)
@@ -12,7 +13,7 @@ app = Flask(__name__)
 @app.route("/", methods=["GET", "POST"])
 def index():
     answer = None
-    # training_pipeline.train()
+    
     if request.method == "POST":
         prompt = request.form.get("prompt")
         if prompt:

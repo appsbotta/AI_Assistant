@@ -13,7 +13,7 @@ RUN mkdir -p logs && chmod -R 777 logs
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-RUN python main.py
+# RUN python main.py
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
