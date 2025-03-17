@@ -19,7 +19,7 @@ class PredictionPipeline:
 
     def chain(self):
         embeddings = OpenAIEmbeddings()
-        loader = PyPDFDirectoryLoader("artifacts/data_transformation")
+        loader = PyPDFDirectoryLoader("/tmp/artifacts/data_transformation")
         docs = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         final_documents = text_splitter.split_documents(docs)
