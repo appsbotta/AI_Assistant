@@ -4,8 +4,6 @@ from bot.pipeline.stage_02_data_transformation import DataTransformationTraining
 import os
 from dotenv import load_dotenv
 load_dotenv()
-print(os.getenv("TOKEN"))
-print(os.getenv("OPENAI_API_KEY"))
 
 STAGE_NAME = "Data Ingestion stage"
 try:
