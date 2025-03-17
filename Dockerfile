@@ -13,7 +13,8 @@ RUN mkdir -p logs && chmod -R 777 logs
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-# RUN python main.py
+# Switch to root user
+USER root
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
