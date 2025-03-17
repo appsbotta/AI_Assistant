@@ -1,6 +1,6 @@
 import os
 import requests
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Preformatted
 from bot import logger
@@ -11,6 +11,7 @@ import base64
 from pathlib import Path
 from bot.entity.config_entity import DataTrasformationConfig
 import shutil
+from datetime import datetime
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -29,6 +30,15 @@ class DataTransformation:
         with open(os.path.join(file_dir,'data.json'),'r',encoding='utf-8') as f:
             data = json.load(f)
         return data
+    
+    def get_last_updated(self):
+        file_dir = self.config.file_dir
+        with open(os.path.join(file_dir,'data.json'),'r',encoding='utf-8') as f:
+            data = json.load(f)
+        sorted_repos = sorted(data, 
+                      key=lambda repo: datetime.strptime(repo["updated_at"], "%Y-%m-%dT%H:%M:%SZ"), 
+                      reverse=True)
+        return sorted_repos
     
     def get_lang(self,repo_name):
         url = f'https://api.github.com/repos/appsbotta/{repo_name}/languages'
@@ -70,7 +80,8 @@ class DataTransformation:
         save_dir = self.config.save_dir
         data = self.get_data()
 
-        doc = SimpleDocTemplate(os.path.join(save_dir,'repo.pdf'), pagesize=letter)
+        doc = SimpleDocTemplate(os.path.join(save_dir,'repo.pdf'), pagesize=A4)
+        doc1 = SimpleDocTemplate(os.path.join(save_dir,'last.pdf'), pagesize=A4)
         styles = getSampleStyleSheet()
         custom_style = ParagraphStyle(
             'Custom',
@@ -91,7 +102,15 @@ class DataTransformation:
 
         content = []
 
-
+        
+        sorted_repos = self.get_last_updated()
+        for i,repo in enumerate(sorted_repos):
+            time = datetime.strptime(repo["updated_at"], "%Y-%m-%dT%H:%M:%SZ")
+            text = f"{repo['name']} last Updated at {time}"
+            paragraph = Paragraph(text,custom_style)
+            content.append(paragraph)
+        doc1.build(content)
+        content = []
 
         for i,repo in enumerate(data):
             text = f"{i+1}. <b>{repo['name']}</b>  --->   {repo['html_url']} \n"
