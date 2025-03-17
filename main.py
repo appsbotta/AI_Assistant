@@ -1,7 +1,10 @@
 from bot import logger
 from bot.pipeline.stage_01_data_ingestion import DataIngestionTrainingPipeline
 from bot.pipeline.stage_02_data_transformation import DataTransformationTrainingPipeline
-
+import os
+from dotenv import load_dotenv
+load_dotenv()
+print(os.getenv("TOKEN"))
 
 STAGE_NAME = "Data Ingestion stage"
 try:
